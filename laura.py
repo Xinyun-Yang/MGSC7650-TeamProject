@@ -407,7 +407,9 @@ with model_testing:
     st.caption("Example Input: Classic")
     st.write("")
     
-    year = st.number_input("Publication Year").strip()
+
+    year = st.number_input("Publication Year")
+    # year = st.text_input("Publication Year").strip()
     st.caption("Example Input: 2003 / 1958")  
     # st.caption('Not sensitive to white spaces, but the app will display a specific warning if you enter other characters.')
     st.write("")
