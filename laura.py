@@ -313,48 +313,14 @@ with model_testing:
     # Extract the year from the datetime objects and save it as a new column
     df['publication_year'] = df['publication_date'].dt.strftime('%Y').astype(float)
     df.drop(columns = 'publication_date', inplace=True)
-
-    # # Define a function to compute the pairwise cosine similarity between the feature vectors
-    # def compute_cosine_similarity(df):
-    #     # Convert the text columns to numerical representations
-    #     cv_genre = CountVectorizer()
-    #     genre_matrix = cv_genre.fit_transform(df['genres'].astype(str).apply(lambda x: ','.join(x.split(';'))))
-    #     cv_author = CountVectorizer()
-    #     author_matrix = cv_author.fit_transform(df['Author'].astype(str))
-    #     cv_title = CountVectorizer()
-    #     title_matrix = cv_title.fit_transform(df['Title'].astype(str))
-    #     cv_lang = CountVectorizer()
-    #     lang_matrix = cv_lang.fit_transform(df['language_code'].astype(str))
-    #     cv_pub = CountVectorizer()
-    #     pub_matrix = cv_pub.fit_transform(df['publisher'].astype(str))
-
-    #     # Standardize the numerical columns
-    #     scaler = StandardScaler()
-    #     numerical_cols = ['average_rating', 'ratings_count', 'text_reviews_count', 'publication_year']
-    #     numerical_data = df[numerical_cols].fillna(df[numerical_cols].median())
-    #     numerical_data = scaler.fit_transform(numerical_data)
-
-    #     # Concatenate the numerical and text representations into a single feature matrix
-    #     feature_matrix = np.concatenate([genre_matrix.toarray(),
-    #                                     author_matrix.toarray(),
-    #                                     title_matrix.toarray(),
-    #                                     lang_matrix.toarray(),
-    #                                     pub_matrix.toarray(),
-    #                                     numerical_data],
-    #                                     axis=1)
-
-    #     # Compute the pairwise cosine similarity between the feature vectors
-    #     cosine_sim_matrix = cosine_similarity(feature_matrix)
-
-    #     return cosine_sim_matrix
-
-    # cosine_sim_matrix = compute_cosine_similarity(df)
+    
 
     st.subheader("1. Recommend books with book title")
 
     book_title = st.text_input("Title")
     st.caption('Please input specific book title.')
     st.caption('Example Input:   Notes from a Small Island, **notes from a small island**, The Changeling Sea, The Lord of the Rings: Weapons and Warfare')
+    st.caption('Not sensitive to white spaces and upper/lowercase letters')
 
     def get_recommendations(book_title,df,cosine_sim_matrix,top_k=10):
         book_title = book_title.lower()
@@ -441,8 +407,9 @@ with model_testing:
     st.caption("Example Input: Classic")
     st.write("")
     
-    year = st.text_input("Publication Year").strip()
+    year = st.number_input("Publication Year").strip()
     st.caption("Example Input: 2003 / 1958")  
+    # st.caption('Not sensitive to white spaces, but the app will display a specific warning if you enter other characters.')
     st.write("")
 
 
