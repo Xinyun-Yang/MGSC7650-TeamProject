@@ -29,14 +29,15 @@ storage_client = storage.Client()
 
 # load the training data file from bucket
 # bucket = storage_client.bucket('laura-goodreads')
+# blob = bucket.blob('Goodreads_books_with_genres.csv')
 # data_file = tempfile.gettempdir() + '/books2.csv'
 # blob.download_to_filename(data_file)
 # df = pd.read_csv(data_file, encoding='ISO-8859-1')
 
 bucket = storage_client.bucket('bk-rec-model')
-# blob = bucket.blob('Goodreads_books_with_genres.csv')
+blob = bucket.blob('Goodreads_books_with_genres.csv')
 data_file = tempfile.gettempdir() + '/Goodreads_books_with_genres.csv'
-# blob.download_to_filename(data_file)
+blob.download_to_filename(data_file)
 df = pd.read_csv(data_file, encoding='ISO-8859-1')
 
 st.set_page_config(page_title="Book Recommendation Generator", layout="wide")

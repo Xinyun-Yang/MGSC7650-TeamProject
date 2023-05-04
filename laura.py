@@ -411,7 +411,7 @@ with model_testing:
     year = st.number_input("Publication Year")
     # year = st.text_input("Publication Year").strip()
     st.caption("Example Input: 2003 / 1958")  
-    # st.caption('Not sensitive to white spaces, but the app will display a specific warning if you enter other characters.')
+    st.caption('Not sensitive to white spaces, but the app will display a editted warning if you enter other characters. We tried the st.number_input(), but the format was not good.')
     st.write("")
 
 
